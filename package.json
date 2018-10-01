@@ -1,0 +1,12 @@
+{
+  "name": "fs-request-cache",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "app-root-path": "^2.1.0",
+    "axios-https-proxy-fix": "^0.17.1",
+    "cheerio": "^1.0.0-rc.2",
+    "fs-extra": "^7.0.0"
+  }
+}
