@@ -16,7 +16,7 @@ const config = {
 
 const filePath = key => `${config.path}/${hash(key)}`
 
-fs.ensureDirSync(config.path)
+let written = false
 
 module.exports = {
   config,
@@ -44,6 +44,11 @@ module.exports = {
 
   set: async (key, val, ttl) => {
     const exp = typeof ttl === 'number' ? Date.now() + ttl * 1000 : -1
+
+    if (!written) {
+      written = true
+      fs.ensureDirSync(config.path)
+    }
 
     return fs.writeFile(filePath(key), `${exp}\n${val}`, 'utf8')
   }
