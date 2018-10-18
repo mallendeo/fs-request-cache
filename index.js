@@ -14,12 +14,12 @@ const fromCache = async (url, json) => {
 
 const request = async (url, opts = {}, axiosOpts = {}) => {
   const { ttl, force, json } = opts
-  const { headers = {}, params = {}, body = {} } = axiosOpts
   const key =
     url +
-    JSON.stringify(headers) +
-    JSON.stringify(params) +
-    JSON.stringify(body)
+    JSON.stringify(axiosOpts.headers || {}) +
+    JSON.stringify(axiosOpts.params || {}) +
+    JSON.stringify(axiosOpts.body || {}) +
+    JSON.stringify(axiosOpts.data || {})
 
   const cached = await fromCache(key, json)
   if (!force && cached) return cached
@@ -53,7 +53,14 @@ const dom = async (...args) => {
   return html && cheerio.load(html)
 }
 
+const json = async (url, opts = {}, ...args) => {
+  return request(url, { ...opts, json: true }, ...args)
+}
+
 module.exports = {
+  cache,
+  cheerio,
   request,
-  dom
+  dom,
+  json
 }

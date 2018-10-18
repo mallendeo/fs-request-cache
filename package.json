@@ -1,6 +1,6 @@
 {
   "name": "fs-request-cache",
-  "version": "1.0.2",
+  "version": "1.0.3",
 	"description": "Simple http cache using cheerio and fs",
   "repository": "mallendeo/fs-request-cache",
   "author": {
